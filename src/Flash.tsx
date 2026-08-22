@@ -1,4 +1,5 @@
 import { Stage } from './Stage';
+import { Pingpongball } from './movieclips/Pingpongball';
 
 export type FlashProps = {
   movie: string;
@@ -26,7 +27,9 @@ export function Flash({
           height: '100%',
           display: 'block',
         }}
-      />
+      >
+        {movie === 'pingpong' ? <Pingpongball /> : null}
+      </div>
     </Stage>
   );
 }
