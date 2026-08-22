@@ -1,32 +1,19 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Stage } from './Stage';
-import { TraceMC } from './TraceMC';
-import { Logo } from './movieclips/Logo';
-import { Pingpongball } from './movieclips/Pingpongball';
-import { getMovie } from './movies';
+import { Logo } from './MovieClips/Logo';
+import { Pingpongball } from './MovieClips/Pingpongball';
+import { TraceMC } from './MovieClips/TraceMC';
+import { getActionScript } from './ActionScript';
+import type { FlashHandle, FlashProps } from './types';
 
-export type FlashHandle = {
-  play: () => void;
-  pause: () => void;
-  restart: () => void;
-};
-
-export type FlashProps = {
-  movie: string;
-  width?: number;
-  height?: number;
-  color?: string;
-  loop?: boolean;
-  autoPlay?: boolean;
-  debug?: boolean;
-};
+export type { FlashHandle, FlashProps } from './types';
 
 export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
   {
     movie,
-    width = 300,
-    height = 250,
+    width = '100%',
+    height = '100%',
     color = 'black',
     loop = false,
     autoPlay = true,
@@ -36,15 +23,15 @@ export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
 ) {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const selectedMovie = getMovie(movie);
+  const selectedActionScript = getActionScript(movie);
 
   useEffect(() => {
     const target = targetRef.current;
-    if (!target || !selectedMovie) {
+    if (!target || !selectedActionScript) {
       return;
     }
 
-    const tl = selectedMovie({
+    const tl = selectedActionScript({
       target,
       loop,
     });
@@ -62,7 +49,7 @@ export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
       timelineRef.current = null;
       gsap.set(target, { clearProps: 'all' });
     };
-  }, [autoPlay, loop, movie, selectedMovie]);
+  }, [autoPlay, loop, movie, selectedActionScript]);
 
   useImperativeHandle(ref, () => ({
     play: () => {
@@ -89,7 +76,7 @@ export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
           position: 'relative',
         }}
       >
-        {selectedMovie ? (
+        {selectedActionScript ? (
           <div ref={targetRef} style={{ position: 'absolute', left: '50%', top: '50%' }}>
             {movie === 'logo' ? <Logo /> : <Pingpongball />}
           </div>

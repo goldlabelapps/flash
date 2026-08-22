@@ -3,9 +3,18 @@ import { act } from 'react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
 import { Flash, type FlashHandle } from '../Flash';
-import { getMovie } from '../movies';
+import { getActionScript } from '../ActionScript';
 
 describe('Flash', () => {
+  it('fills its parent dimensions when width and height are omitted', () => {
+    render(<Flash movie="pingpong" />);
+
+    const stage = screen.getByLabelText('Flash stage');
+
+    expect(stage.style.width).toBe('100%');
+    expect(stage.style.height).toBe('100%');
+  });
+
   it('runs a pingpong movie and animates the target element', async () => {
     render(<Flash movie="pingpong" width={300} height={250} color="black" loop={false} />);
 
@@ -16,9 +25,9 @@ describe('Flash', () => {
     }, { timeout: 2000 });
   });
 
-  it('looks up movies through a registry instead of a giant switch statement', () => {
-    expect(getMovie('pingpong')).toBeDefined();
-    expect(getMovie('unknown-movie')).toBeUndefined();
+  it('looks up ActionScript through a registry instead of a giant switch statement', () => {
+    expect(getActionScript('pingpong')).toBeDefined();
+    expect(getActionScript('unknown-movie')).toBeUndefined();
   });
 
   it('exposes playback controls via ref', () => {

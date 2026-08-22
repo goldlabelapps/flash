@@ -1,16 +1,13 @@
 import { gsap } from 'gsap';
+import type { LogoActionScriptOptions } from '../types';
 
-export type LogoMovieOptions = {
-  target: HTMLElement;
-  loop?: boolean;
-  onComplete?: () => void;
-};
+export type { LogoActionScriptOptions } from '../types';
 
 export default function logo({
   target,
   loop = false,
   onComplete,
-}: LogoMovieOptions) {
+}: LogoActionScriptOptions) {
   const tl = gsap.timeline({
     repeat: loop ? -1 : 0,
     onComplete,

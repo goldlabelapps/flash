@@ -1,11 +1,18 @@
 export { Flash } from './Flash';
 export { Stage } from './Stage';
-export { TraceMC } from './TraceMC';
-export { Logo } from './movieclips/Logo';
-export { Pingpongball } from './movieclips/Pingpongball';
-export { getMovie, movies } from './movies';
-export type { FlashProps } from './Flash';
-export type { StageProps } from './Stage';
-export type { TraceMCProps } from './TraceMC';
-export type { LogoProps } from './movieclips/Logo';
-export type { PingpongballProps } from './movieclips/Pingpongball';
+export { Logo } from './MovieClips/Logo';
+export { Pingpongball } from './MovieClips/Pingpongball';
+export { TraceMC } from './MovieClips/TraceMC';
+export { actionScripts, getActionScript } from './ActionScript';
+export type {
+	ActionScriptFactory,
+	ActionScriptOptions,
+	FlashHandle,
+	FlashProps,
+	LogoActionScriptOptions,
+	LogoProps,
+	PingpongActionScriptOptions,
+	PingpongballProps,
+	StageProps,
+	TraceMCProps,
+} from './types';

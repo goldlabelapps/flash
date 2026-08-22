@@ -20,8 +20,10 @@
   ],
   "scripts": {
     "build": "tsup",
+    "dev": "pnpm dev:library & pnpm --dir example dev",
+    "dev:library": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "check:consumer": "node --input-type=module -e \"import { Flash } from './dist/index.js'; if (typeof Flash !== 'function') throw new Error('Flash export missing'); console.log('Consumer import ok');\""
+    "check:consumer": "node --input-type=module -e \"import { Flash } from './dist/index.js'; if (!Flash || typeof Flash.render !== 'function') throw new Error('Flash export missing'); console.log('Consumer import ok');\""
   },
   "pnpm": {
     "onlyBuiltDependencies": [

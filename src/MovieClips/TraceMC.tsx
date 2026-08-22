@@ -1,7 +1,6 @@
-export type TraceMCProps = {
-  movie: string;
-  active?: boolean;
-};
+import type { TraceMCProps } from '../types';
+
+export type { TraceMCProps } from '../types';
 
 export function TraceMC({ movie, active = true }: TraceMCProps) {
   if (!active) {

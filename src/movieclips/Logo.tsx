@@ -1,8 +1,6 @@
-export type LogoProps = {
-  text?: string;
-  color?: string;
-  size?: number;
-};
+import type { LogoProps } from '../types';
+
+export type { LogoProps } from '../types';
 
 export function Logo({
   text = 'Flash',

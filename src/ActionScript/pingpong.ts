@@ -1,16 +1,13 @@
 import { gsap } from 'gsap';
+import type { PingpongActionScriptOptions } from '../types';
 
-export type PingpongMovieOptions = {
-  target: HTMLElement;
-  loop?: boolean;
-  onComplete?: () => void;
-};
+export type { PingpongActionScriptOptions } from '../types';
 
 export default function pingpong({
   target,
   loop = false,
   onComplete,
-}: PingpongMovieOptions) {
+}: PingpongActionScriptOptions) {
   const tl = gsap.timeline({
     repeat: loop ? -1 : 0,
     onComplete,
