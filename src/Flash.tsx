@@ -1,3 +1,5 @@
+import { Stage } from './Stage';
+
 export type FlashProps = {
   movie: string;
   width?: number;
@@ -14,17 +16,18 @@ export function Flash({
   loop = false,
 }: FlashProps) {
   return (
-    <div
-      data-flash-movie={movie}
-      data-flash-loop={String(loop)}
-      style={{
-        width,
-        height,
-        backgroundColor: color,
-        display: 'block',
-      }}
-      aria-label={`Flash movie: ${movie}`}
-    />
+    <Stage width={width} height={height} color={color}>
+      <div
+        data-flash-movie={movie}
+        data-flash-loop={String(loop)}
+        aria-label={`Flash movie: ${movie}`}
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block',
+        }}
+      />
+    </Stage>
   );
 }
 
