@@ -1,11 +1,24 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { act } from 'react';
+import { act, StrictMode } from 'react';
 import { createRef } from 'react';
 import { describe, expect, it } from 'vitest';
 import { Flash, type FlashHandle } from '../Flash';
 import { getActionScript } from '../ActionScript';
 
 describe('Flash', () => {
+  it('preserves centered movie positioning in Strict Mode', () => {
+    render(
+      <StrictMode>
+        <Flash movie="pingpong" />
+      </StrictMode>,
+    );
+
+    const target = screen.getByLabelText('Pingpongball').parentElement;
+
+    expect(target?.style.left).toBe('50%');
+    expect(target?.style.top).toBe('50%');
+  });
+
   it('fills its parent dimensions when width and height are omitted', () => {
     render(<Flash movie="pingpong" />);
 

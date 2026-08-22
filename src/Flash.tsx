@@ -47,7 +47,7 @@ export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
     return () => {
       tl.kill();
       timelineRef.current = null;
-      gsap.set(target, { clearProps: 'all' });
+      gsap.set(target, { clearProps: 'transform,opacity' });
     };
   }, [autoPlay, loop, movie, selectedActionScript]);
 
