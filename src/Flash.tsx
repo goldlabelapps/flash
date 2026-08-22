@@ -1,5 +1,8 @@
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { Stage } from './Stage';
 import { Pingpongball } from './movieclips/Pingpongball';
+import pingpongMovie from './movies/pingpong';
 
 export type FlashProps = {
   movie: string;
@@ -16,6 +19,25 @@ export function Flash({
   color = 'black',
   loop = false,
 }: FlashProps) {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const target = targetRef.current;
+    if (!target || movie !== 'pingpong') {
+      return;
+    }
+
+    const tl = pingpongMovie({
+      target,
+      loop,
+    });
+
+    return () => {
+      tl.kill();
+      gsap.set(target, { clearProps: 'all' });
+    };
+  }, [movie, loop]);
+
   return (
     <Stage width={width} height={height} color={color}>
       <div
@@ -26,9 +48,14 @@ export function Flash({
           width: '100%',
           height: '100%',
           display: 'block',
+          position: 'relative',
         }}
       >
-        {movie === 'pingpong' ? <Pingpongball /> : null}
+        {movie === 'pingpong' ? (
+          <div ref={targetRef} style={{ position: 'absolute', left: '50%', top: '50%' }}>
+            <Pingpongball />
+          </div>
+        ) : null}
       </div>
     </Stage>
   );
