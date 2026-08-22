@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Stage } from './Stage';
 import { TraceMC } from './TraceMC';
+import { Logo } from './movieclips/Logo';
 import { Pingpongball } from './movieclips/Pingpongball';
 import { getMovie } from './movies';
 
@@ -90,7 +91,7 @@ export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
       >
         {selectedMovie ? (
           <div ref={targetRef} style={{ position: 'absolute', left: '50%', top: '50%' }}>
-            <Pingpongball />
+            {movie === 'logo' ? <Logo /> : <Pingpongball />}
           </div>
         ) : null}
         <TraceMC movie={movie} active={debug} />
