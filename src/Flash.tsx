@@ -1,8 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Stage } from './Stage';
+import { TraceMC } from './TraceMC';
 import { Pingpongball } from './movieclips/Pingpongball';
 import { getMovie } from './movies';
+
+export type FlashHandle = {
+  play: () => void;
+  pause: () => void;
+  restart: () => void;
+};
 
 export type FlashProps = {
   movie: string;
@@ -10,16 +17,24 @@ export type FlashProps = {
   height?: number;
   color?: string;
   loop?: boolean;
+  autoPlay?: boolean;
+  debug?: boolean;
 };
 
-export function Flash({
-  movie,
-  width = 300,
-  height = 250,
-  color = 'black',
-  loop = false,
-}: FlashProps) {
+export const Flash = forwardRef<FlashHandle, FlashProps>(function Flash(
+  {
+    movie,
+    width = 300,
+    height = 250,
+    color = 'black',
+    loop = false,
+    autoPlay = true,
+    debug = false,
+  },
+  ref,
+) {
   const targetRef = useRef<HTMLDivElement | null>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const selectedMovie = getMovie(movie);
 
   useEffect(() => {
@@ -33,11 +48,32 @@ export function Flash({
       loop,
     });
 
+    timelineRef.current = tl;
+
+    if (autoPlay) {
+      tl.play();
+    } else {
+      tl.pause(0);
+    }
+
     return () => {
       tl.kill();
+      timelineRef.current = null;
       gsap.set(target, { clearProps: 'all' });
     };
-  }, [loop, movie, selectedMovie]);
+  }, [autoPlay, loop, movie, selectedMovie]);
+
+  useImperativeHandle(ref, () => ({
+    play: () => {
+      timelineRef.current?.play();
+    },
+    pause: () => {
+      timelineRef.current?.pause();
+    },
+    restart: () => {
+      timelineRef.current?.restart();
+    },
+  }));
 
   return (
     <Stage width={width} height={height} color={color}>
@@ -57,9 +93,10 @@ export function Flash({
             <Pingpongball />
           </div>
         ) : null}
+        <TraceMC movie={movie} active={debug} />
       </div>
     </Stage>
   );
-}
+});
 
 export default Flash;
