@@ -1,0 +1,50 @@
+{
+  "name": "@goldlabelapps/flash",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A public React/TypeScript animation library inspired by the Flash programming model.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "check:consumer": "node --input-type=module -e \"import { Flash } from './dist/index.js'; if (typeof Flash !== 'function') throw new Error('Flash export missing'); console.log('Consumer import ok');\""
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "animation",
+    "flash",
+    "library"
+  ],
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
+  }
+}
