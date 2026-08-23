@@ -18,7 +18,7 @@ The library currently includes:
 - an optional `TraceMC` debug overlay
 - strict TypeScript and a working build pipeline
 
-This is not yet a full Flash runtime or a published npm package. It is a buildable foundation that reflects the incremental direction described in the project goals.
+This is not yet a full Flash runtime, but the package is ready to be published to npm as a buildable foundation that reflects the incremental direction described in the project goals.
 
 ## Installation
 
@@ -112,7 +112,10 @@ src/
 │   ├── Pingpongball.tsx
 │   └── Logo.tsx
 ├── __tests__/
-│   └── Flash.test.tsx
+│   ├── Flash.layout.test.tsx
+│   ├── Flash.animation.test.tsx
+│   ├── Flash.debug.test.tsx
+│   └── ActionScript.test.ts
 └── index.ts
 ```
 

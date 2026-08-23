@@ -1,11 +1,11 @@
 {
   "name": "@goldlabelapps/flash",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "A public React/TypeScript animation library inspired by the Flash programming model.",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
