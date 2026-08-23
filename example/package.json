@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,7 +12,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@goldlabelapps/flash": "link:..",
+    "@goldlabelapps/flash": "0.1.2",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "react": "^18.3.1",

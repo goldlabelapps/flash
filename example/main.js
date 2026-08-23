@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Flash } from '@goldlabelapps/flash';
+import './reset.css';
 
 function App() {
   return React.createElement(
     'div',
-    { style: { fontFamily: 'sans-serif', padding: 24 } },
+    { style: { height: '100%' } },
     React.createElement(Flash, {
-      movie: 'logo',
-      width: 300,
-      height: 180,
-      color: '#111111',
+      movie: 'pingpong',
+      color: '#0b564a',
       debug: true,
     }),
   );

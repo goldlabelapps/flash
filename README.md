@@ -1,6 +1,6 @@
 # Flash
 
-A lightweight React + TypeScript library inspired by the classic Flash programming model.
+> A lightweight React + TypeScript library inspired by the classic Flash programming model.
 
 This repository is intentionally being built in small steps rather than as a full port all at once. The current package is a minimal, buildable library foundation with a public `Flash` component, a simple stage wrapper, and a few example movie clips and GSAP-driven movie definitions.
 
@@ -12,13 +12,13 @@ The library currently includes:
 - a `Stage` rendering surface
 - a presentational `Pingpongball` MovieClip
 - a minimal `Logo` MovieClip
-- GSAP-backed movie definitions for `pingpong` and `logo`
-- movie lookup via a lightweight registry
+- GSAP-backed ActionScript definitions for `pingpong` and `logo`
+- ActionScript lookup via a lightweight registry
 - a ref-based playback API (`play`, `pause`, `restart`)
 - an optional `TraceMC` debug overlay
 - strict TypeScript and a working build pipeline
 
-This is not yet a full Flash runtime or a published npm package. It is a buildable foundation that reflects the incremental direction described in the project goals.
+This is not yet a full Flash runtime, but the package is ready to be published to npm as a buildable foundation that reflects the incremental direction described in the project goals.
 
 ## Installation
 
@@ -89,9 +89,9 @@ A simple render surface responsible for dimensions and presentation.
 
 A visual component rendered on the stage. These are intentionally presentational and do not contain timeline logic.
 
-### Movie
+### ActionScript
 
-A GSAP-driven definition. It owns animation timing and is selected via the movie registry.
+A GSAP-driven definition. It owns animation timing and is selected via the ActionScript registry.
 
 ### TraceMC
 
@@ -103,16 +103,19 @@ A lightweight debug overlay that can be enabled temporarily for troubleshooting 
 src/
 ├── Flash.tsx
 ├── Stage.tsx
-├── TraceMC.tsx
-├── movies.ts
-├── movies/
+├── ActionScript.ts
+├── ActionScript/
 │   ├── pingpong.ts
 │   └── logo.ts
-├── movieclips/
+├── MovieClips/
+│   ├── TraceMC.tsx
 │   ├── Pingpongball.tsx
 │   └── Logo.tsx
 ├── __tests__/
-│   └── Flash.test.tsx
+│   ├── Flash.layout.test.tsx
+│   ├── Flash.animation.test.tsx
+│   ├── Flash.debug.test.tsx
+│   └── ActionScript.test.ts
 └── index.ts
 ```
 
@@ -139,7 +142,7 @@ Prefer simple functions/components where appropriate.
 
 Keep MovieClips presentational.
 
-Keep animation in Movies.
+Keep animation in ActionScript.
 
 Keep runtime coordination in Stage.
 
@@ -152,29 +155,3 @@ Do not couple the package to a particular framework beyond React.
 Do not make speculative abstractions.
 
 Do not solve problems we haven't encountered yet.
-
-## How I want you to work
-
-I will be directing the project interactively.
-
-When I say something like:
-
-"Let's do step 1"
-
-only implement Step 1.
-
-When I say:
-
-"Next"
-
-move to the next appropriate step.
-
-Before making a significant architectural decision, explain the decision briefly and wait for my approval if it could materially affect the public API.
-
-The public API is more important than preserving the existing internal implementation.
-
-The ultimate goal is:
-
-> A small, elegant, genuinely reusable React animation library that brings the conceptual model of Macromedia Flash — Stage, MovieClips and ActionScript-style movies — into modern JavaScript.
-
-Start by inspecting the repository and implementing **Step 1 only**.

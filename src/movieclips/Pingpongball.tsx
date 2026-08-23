@@ -1,9 +1,6 @@
-export type PingpongballProps = {
-  size?: number;
-  color?: string;
-  x?: number;
-  y?: number;
-};
+import type { PingpongballProps } from '../types';
+
+export type { PingpongballProps } from '../types';
 
 export function Pingpongball({
   size = 28,

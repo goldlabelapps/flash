@@ -1,15 +1,11 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
+import type { StageProps } from './types';
 
-export type StageProps = {
-  width?: number;
-  height?: number;
-  color?: string;
-  children?: ReactNode;
-};
+export type { StageProps } from './types';
 
 export function Stage({
-  width = 300,
-  height = 250,
+  width = '100%',
+  height = '100%',
   color = 'black',
   children,
 }: StageProps) {
